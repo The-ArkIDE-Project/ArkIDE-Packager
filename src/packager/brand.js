@@ -49,7 +49,7 @@ limitations under the License.`,
   SOURCE_CODE: 'https://github.com/The-ArkIDE-Project/ArkIDE-Packager',
   FEEDBACK_PRIMARY: {
     name: 'Discord',
-    link: 'https://discord.gg/NZ9MBMYTZh'
+    link: 'https://discord.gg/aPRchS3Zdp'
   },
   FEEDBACK_SECONDARY: {
     name: 'GitHub',
