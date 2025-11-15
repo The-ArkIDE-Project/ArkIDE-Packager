@@ -17,7 +17,7 @@
 
   const defaultProjectId = '4624594217';
 
-  const type = writablePersistentStore('SelectProject.type', 'id');
+  const type = writablePersistentStore('SelectProject.type', 'file');
   const projectId = writablePersistentStore('SelectProject.id', defaultProjectId);
   const projectUrl = writablePersistentStore('SelectProject.url', '');
 
