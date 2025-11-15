@@ -61,7 +61,7 @@
     color: black;
   }
   :global([theme="dark"]) {
-    background-image: url('testr.jpg');
+    background-image: url('dar.png');
         background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
