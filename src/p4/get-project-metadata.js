@@ -6,8 +6,8 @@ const getProjectMetadata = async (id) => {
     const meta = await request({
       url: [
         // Hopefully one of these URLs won't be blocked.
-        `https://projects.penguinmod.com/api/projects/getPublished?id=${id}`,
-        `https://projects.penguinmod.com/api/projects/getPublished?id=${id}`
+        `https://arkideapi.arc360hub.com/api/v1/projects/getproject?projectID=${id}&requestType=metadata`,
+        `https://arkideapi.arc360hub.com/api/v1/projects/getproject?projectID=${id}&requestType=metadata`
       ],
       type: 'json'
     });
