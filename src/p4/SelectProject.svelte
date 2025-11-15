@@ -231,10 +231,6 @@
     <p>{$_('select.selectHelp')}</p>
 
     <div class="options">
-      <div class="option">
-
-
-      </div>
       <!-- TurboWarp Desktop looks for the file-input-option class for special handling, so be careful when modifying this. -->
       <div class="option file-input-option">
         <label>

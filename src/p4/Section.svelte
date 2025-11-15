@@ -12,24 +12,33 @@
   .card {
     max-width: 625px;
     margin: auto;
-    border-radius: 0.3em;
-    background-color: #fff;
+    border-radius: 1em;
+    background-color: #ffffff40; /* lighter transparency for better blur */
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
     padding: 1em;
     margin-top: 1em;
     margin-bottom: 1em;
-    box-shadow: 0 2px 0.5em 0.1em rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 0.5em 0.1em rgba(36, 36, 36, 0.2);
   }
+
+  /* Dark mode glass effect */
   :global([theme="dark"]) .card {
-    background: #222;
+    background: #22222240;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
   }
+
   .caption {
     font-style: italic;
   }
+
   .modal {
     width: 100%;
     max-width: 400px;
     margin: 0 8px;
   }
+
   .center {
     height: 40px;
     display: flex;
@@ -37,6 +46,7 @@
     align-items: center;
     text-align: center;
   }
+
   .reset {
     float: right;
   }

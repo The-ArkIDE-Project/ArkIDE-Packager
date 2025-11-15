@@ -20,7 +20,7 @@
     border: none;
     padding: 0.5rem 1rem;
     margin: 0;
-    border-radius: 4px;
+    border-radius: 24px;
     overflow: hidden;
     cursor: pointer;
     font-family: inherit;

@@ -21,7 +21,7 @@
     border: none;
     background: none;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 24px;
   }
   button:hover {
     background: rgba(0, 0, 0, 0.15);

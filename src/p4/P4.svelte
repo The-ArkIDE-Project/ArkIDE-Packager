@@ -53,11 +53,19 @@
 <style>
   :root {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: white;
+    background-image: url('testr.jpg');
+        background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: black;
   }
   :global([theme="dark"]) {
-    background: #111;
+    background-image: url('testr.jpg');
+        background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: #eee;
     color-scheme: dark;
   }
@@ -82,7 +90,7 @@
     background-color: white;
     color: black;
     border: 1px solid rgb(160, 160, 160);
-    border-radius: 2px;
+    border-radius: 8px;
   }
   :global(.is-not-safari select:hover) {
     border-color: rgb(30, 30, 30);

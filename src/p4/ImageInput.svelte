@@ -67,7 +67,7 @@
     box-sizing: border-box;
     border: 3px dashed currentColor;
     transition: .2s border-color, .2s color;
-    border-radius: 20px;
+    border-radius: 24px;
     min-height: 90px;
     font: inherit;
     display: flex;
