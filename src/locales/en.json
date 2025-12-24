@@ -119,7 +119,7 @@
       "string": "Select Project"
     },
     "selectHelp": {
-      "string": "Select the project you want to package by copying and pasting the ArkIDE project link or using one of the other modes. If you use a project you didn't make, make sure to credit the creator. The option to import a project from ArkIDE has been removed as its completly broken because the API route for it is just gone for some reason."
+      "string": "Select the project you want to package by copying and pasting the ArkIDE project link or using one of the other modes. If you use a project you didn't make, make sure to credit the creator. You can import an ArkIDE Project by entering the project ID or pasting in a project viewer link, for example: https://arkide.site/viewer#4630663922."
     },
     "id": {
       "string": "ArkIDE Project ID or URL",

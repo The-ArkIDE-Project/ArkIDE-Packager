@@ -14,6 +14,8 @@
   import {extractProjectId, isValidURL, getTitleFromURL} from './url-utils';
   import Task from './task';
   import importExternalProject from './import-external-project';
+  import JSZip from 'jszip';
+  import { protobufToJson } from 'pmp-protobuf';
 
   const defaultProjectId = '4624594217';
 
@@ -198,6 +200,85 @@
     projectData = await task.do(internalLoad(task));
     task.done();
   };
+
+  let arkideProjectId = '';
+
+  // UPDATED WORKING FUNCTION - Downloads .arkide file using protobuf decoder
+  async function downloadArkideProject() {
+    try {
+      // Extract project ID from URL if full URL is provided
+      let projectId = arkideProjectId.trim();
+      
+      if (projectId.includes('#')) {
+        projectId = projectId.split('#')[1];
+      }
+      
+      // Remove any remaining URL parts
+      projectId = projectId.replace(/^.*?(\d+).*$/, '$1');
+      
+      if (!projectId || !/^\d+$/.test(projectId)) {
+        alert('Please enter a valid project ID');
+        return;
+      }
+      
+      console.log(`Downloading Arkide project ${projectId}...`);
+      
+      // Fetch project wrapper data (this contains protobuf)
+      const url = `https://arkideapi.arc360hub.com/api/v1/projects/getprojectwrapper?safe=true&projectId=${projectId}`;
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch project: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      
+      if (!data.project || !data.project.data) {
+        throw new Error('Invalid project data structure');
+      }
+      
+      console.log('Decoding protobuf to JSON...');
+      
+// Decode protobuf to JSON using pmp-protobuf
+      const json = protobufToJson(new Uint8Array(data.project.data));
+      console.log('Creating .arkide file...');
+      
+      // Create ZIP file with project.json and assets
+      const zip = new JSZip();
+      zip.file("project.json", JSON.stringify(json));
+      
+      // Add all assets
+      if (data.assets && Array.isArray(data.assets)) {
+        console.log(`Adding ${data.assets.length} assets...`);
+        for (const asset of data.assets) {
+          if (asset.id && asset.buffer && asset.buffer.data) {
+            zip.file(asset.id, new Uint8Array(asset.buffer.data).buffer);
+          }
+        }
+      }
+      
+      // Generate the .arkide file as blob
+      const blob = await zip.generateAsync({ type: "blob" });
+      
+      // Trigger download
+// Create a File object from the blob
+      const file = new File([blob], `${projectId}.arkide`, { type: 'application/zip' });
+      
+      // Create a FileList and set it to the file input
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      
+      // Set type to file and load it
+      $type = 'file';
+      setFiles(dataTransfer.files);
+      
+      console.log(`Successfully loaded ${projectId}.arkide into packager`);
+      
+    } catch (error) {
+      console.error('Error downloading ArkIDE project:', error);
+      alert(`Error downloading project: ${error.message}`);
+    }
+  }
 </script>
 
 <style>
@@ -229,16 +310,37 @@
   <Section accent="#1500ff">
     <h2>{$_('select.select')}</h2>
     <p>{$_('select.selectHelp')}</p>
-
     <div class="options">
+      <!-- ArkIDE Project Download Option -->
+      <div class="option">
+        <label>
+          <input type="radio" name="project-type" bind:group={$type} value="arkide">
+          ArkIDE Project ID
+        </label>
+        {#if $type === "arkide"}
+          <div style="display: flex; gap: 8px; margin-top: 8px; width: 100%;">
+            <input 
+              type="text" 
+              bind:value={arkideProjectId} 
+              spellcheck="false" 
+              placeholder="Enter project ID or URL (e.g., 8731049752)"
+              on:keypress={(e) => e.key === 'Enter' && downloadArkideProject()}
+              style="flex: 1;"
+            >
+            <Button on:click={downloadArkideProject} text="Download .arkide" />
+          </div>
+        {/if}
+      </div>
+
       <!-- TurboWarp Desktop looks for the file-input-option class for special handling, so be careful when modifying this. -->
       <div class="option file-input-option">
         <label>
           <input type="radio" name="project-type" bind:group={$type} value="file">
           {$_('select.file')}
         </label>
-        <input hidden={$type !== "file"} on:change={handleFileInputChange} bind:this={fileInputElement} type="file" accept=".sb,.sb2,.sb3, .pm, .pmp, .goobert">
+        <input hidden={$type !== "file"} on:change={handleFileInputChange} bind:this={fileInputElement} type="file" accept=".sb,.sb2,.sb3, .pm, .pmp, .goobert, .arkide">
       </div>
+      
       <div class="option">
         <label>
           <input type="radio" name="project-type" bind:group={$type} value="url">
