@@ -327,7 +327,7 @@
               on:keypress={(e) => e.key === 'Enter' && downloadArkideProject()}
               style="flex: 1;"
             >
-            <Button on:click={downloadArkideProject} text="Download .arkide" />
+            <Button on:click={downloadArkideProject} text="Load ArkIDE Project" />
           </div>
         {/if}
       </div>
