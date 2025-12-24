@@ -53,30 +53,52 @@
 <style>
   :root {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-image: url('testr.jpg');
-        background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     color: black;
+    position: relative;
   }
   :global([theme="dark"]) {
-    background-image: url('dar.png');
-        background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
     color: #eee;
     color-scheme: dark;
   }
-  :global(a) {
-    color: blue;
+  
+  .background-iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: -1;
+    pointer-events: none;
   }
-  :global([theme="dark"] a) {
-    color: #0004ff;
+  
+  :global(a:link) {
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+  }
+  :global(a:visited) {
+    color: rgb(31, 31, 31);
+  }
+  :global(a:hover) {
+    color: rgb(42, 53, 146);
+    text-decoration: none;
   }
   :global(a:active) {
-    color: red;
+    color: rgb(17, 0, 255);
+  }
+  :global([theme="dark"] a:link) {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+  :global([theme="dark"] a:visited) {
+    color: rgb(145, 145, 145);
+  }
+  :global([theme="dark"] a:hover) {
+    color: rgb(158, 167, 255);
+    text-decoration: none;
+  }
+  :global([theme="dark"] a:active) {
+    color: rgb(17, 0, 255);
   }
   :global(input[type="text"]),
   :global(input[type="number"]),
@@ -117,6 +139,7 @@
   }
   main {
     padding-bottom: 10px;
+    position: relative;
   }
   footer {
     text-align: center;
@@ -135,6 +158,14 @@
     color: inherit;
   }
 </style>
+
+<iframe 
+  class="background-iframe" 
+  src={$theme === 'dark' || ($theme === 'system' && systemTheme === 'dark') 
+    ? 'https://www.arc360hub.com/blob/index.html?c1=%23292a9c&c2=%235500ff&c3=%23262c64&c4=%231a5fb4'
+    : 'https://www.arc360hub.com/blob/index.html?c1=%231a5fb4&c2=%231c71d8&c3=%23292a9c&c4=%2362a0ea'}
+  title="Background"
+/>
 
 <Modals bind:modalVisible={modalVisible} />
 
