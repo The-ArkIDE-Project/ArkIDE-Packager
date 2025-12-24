@@ -162,8 +162,8 @@
 <iframe 
   class="background-iframe" 
   src={$theme === 'dark' || ($theme === 'system' && systemTheme === 'dark') 
-    ? 'https://www.arc360hub.com/blob/index.html?c1=%23292a9c&c2=%235500ff&c3=%23262c64&c4=%231a5fb4'
-    : 'https://www.arc360hub.com/blob/index.html?c1=%231a5fb4&c2=%231c71d8&c3=%23292a9c&c4=%2362a0ea'}
+    ? 'https://www.arc360hub.com/blob/index.html?c1=%23292a9c&c2=%235500ff&c3=%23262c64&c4=%231a5fb4&hide=true'
+    : 'https://www.arc360hub.com/blob/index.html?c1=%231a5fb4&c2=%231c71d8&c3=%23292a9c&c4=%2362a0ea&hide=true'}
   title="Background"
 />
 
