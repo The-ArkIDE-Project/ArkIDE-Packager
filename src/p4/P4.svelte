@@ -56,9 +56,14 @@
     color: black;
     position: relative;
   }
+
+  :global([theme="light"]) {
+    background-color: white;
+  }
   :global([theme="dark"]) {
     color: #eee;
     color-scheme: dark;
+    background-color: #111;
   }
   
   .background-iframe {
@@ -121,7 +126,7 @@
   :global([theme="dark"] input[type="number"]),
   :global([theme="dark"] textarea),
   :global([theme="dark"] .is-not-safari select) {
-    background-color: #333;
+    background-color: #4b4b4b;
     color: white;
     border-color: #888;
   }
@@ -158,14 +163,6 @@
     color: inherit;
   }
 </style>
-
-<iframe 
-  class="background-iframe" 
-  src={$theme === 'dark' || ($theme === 'system' && systemTheme === 'dark') 
-    ? 'https://www.arc360hub.com/blob/index.html?c1=%23292a9c&c2=%235500ff&c3=%23262c64&c4=%231a5fb4&hide=true'
-    : 'https://www.arc360hub.com/blob/index.html?c1=%231a5fb4&c2=%231c71d8&c3=%23292a9c&c4=%2362a0ea&hide=true'}
-  title="Background"
-/>
 
 <Modals bind:modalVisible={modalVisible} />
 
